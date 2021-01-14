@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:stage_ilane/animaux.dart';
 import 'package:stage_ilane/description.dart';
+import 'package:flutter/services.dart' show rootBundle;
+import "sons.dart";
 
 void main() {
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+
+  rootBundle.load("sons/chat.mp3").then((_) {
+    Sons.chat = _.buffer.asUint8List();
+    rootBundle.load("sons/chien.mp3").then((_) {
+      Sons.chien = _.buffer.asUint8List();
+      runApp(MyApp());
+    });
+  });
 }
 
 class MyApp extends StatelessWidget {

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sound/flutter_sound.dart';
 import 'package:stage_ilane/animaux.dart';
+import "dart:typed_data";
 
 class DescriptionScreen extends StatefulWidget {
   final Animal animal;
@@ -10,12 +12,32 @@ class DescriptionScreen extends StatefulWidget {
 }
 
 class _DescriptionScreenState extends State<DescriptionScreen> {
+  FlutterSoundPlayer _mPlayer = FlutterSoundPlayer();
+  bool _mPlayerIsInited = false;
   Animal animal;
 
   @override
   void initState() {
     this.animal = this.widget.animal;
+    _mPlayer.openAudioSession().then((valeur) {
+      setState(() {
+        _mPlayerIsInited = true;
+      });
+    });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _mPlayer.closeAudioSession();
+    _mPlayer = null;
+    super.dispose();
+  }
+
+  void play(Uint8List audio) async {
+    if (!_mPlayerIsInited) return;
+    await _mPlayer.startPlayer(
+        fromDataBuffer: audio, codec: Codec.mp3, whenFinished: () {});
   }
 
   @override
@@ -32,6 +54,14 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  IconButton(
+                      icon: Icon(
+                        Icons.add_alert,
+                        size: 40,
+                      ),
+                      onPressed: () {
+                        play(animal.son);
+                      }),
                   SizedBox(height: 15, width: double.infinity),
                   Image(
                     image: AssetImage(animal.image),

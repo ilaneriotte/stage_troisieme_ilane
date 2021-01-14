@@ -1,3 +1,6 @@
+import "sons.dart";
+import "dart:typed_data";
+
 class Animal {
   String nom;
   String description;
@@ -6,6 +9,7 @@ class Animal {
   String sexe;
   bool vivant;
   String surnom;
+  Uint8List get son => this.type == "Chien" ? Sons.chien : Sons.chat;
   Animal({
     this.nom,
     this.surnom = "aucun",
