@@ -25,7 +25,7 @@ List<Animal> animaux = [
   Animal(
       nom: "Fender",
       type: "Chien",
-      description: "Petit chien minion mais un peu débile.",
+      description: "Petit chien minion et un peu foufou.",
       image: 'images/Fendere.jpg',
       sexe: "male",
       surnom: "Fenfen"),
@@ -33,7 +33,7 @@ List<Animal> animaux = [
       nom: "Babzi",
       type: "Chien",
       description:
-          "Une chienne toute fofolle qui fait que manger les affaire des autre et les caca des autres et aime bien les promenades.",
+          "Une chienne toute fofolle qui aime bien les promenades et qui fait que manger les affaires des autres et les cacas des chiens et des chats.",
       image: 'images/Babzi_2.jpg',
       sexe: "femelle",
       surnom: "Babab"),
@@ -62,7 +62,7 @@ List<Animal> animaux = [
   Animal(
       nom: "Ebenne",
       type: "Chien",
-      description: "Très gros chien qui aime bien les promenades et dormir.",
+      description: "Très gros chien qui aime dormir et partir en promenade.",
       image: 'images/Ebenne.jpg',
       sexe: "male",
       vivant: false),
@@ -70,7 +70,7 @@ List<Animal> animaux = [
       nom: "Drana",
       type: "Chien",
       description:
-          "Petite chienne mignone et un petit peu enveloppée qui aime se promener et te suivre.",
+          "Petite chienne mignone un petit peu enveloppée qui te suis et se promène.",
       image: 'images/Drana.jpg',
       sexe: "femelle",
       surnom: "Rana",
@@ -79,7 +79,7 @@ List<Animal> animaux = [
       nom: "Altesse",
       type: "Chien",
       description:
-          "Petite chienne adorable qui dors beaucoup et sui aime les caresses.",
+          "Petite chienne adorable qui dors beaucoup et qui aime les caresses.",
       image: 'images/Altesse.jpg',
       sexe: "femelle",
       vivant: false),
@@ -87,7 +87,7 @@ List<Animal> animaux = [
       nom: "Nuggets",
       type: "Chat",
       description:
-          "un chat roux mignon tout doux et joueur qui sens toujours bon et qui aime bien la pâté et sortir.",
+          "un chat roux mignon tout doux et joueur qui sens toujours bon et qui aime sortir et manget de la pâté.",
       image: 'images/Nuggets.jpg',
       sexe: "male",
       surnom: "Nuggy, Mimi"),
@@ -95,7 +95,7 @@ List<Animal> animaux = [
       nom: "Oreo",
       type: "Chat",
       description:
-          "petit chat mignon et tout doux avec des long poils et qui aime bien la pâté et sortir",
+          "petit chat mignon et tout doux avec des long poils qui aime sortir et manger de la pâté.",
       image: 'images/Oreo.jpg',
       sexe: "male",
       surnom: "Boule de poils, Mimi"),
@@ -114,12 +114,11 @@ List<Animal> animaux = [
           "gros chat qui a pris du poid avec le temps et qui aime bien te mordre et te griffer.",
       image: 'images/Kino.jpg',
       sexe: "male",
-      surnom: "Kiki, Kiko la baleine"),
+      surnom: "Kiki, Kino la baleine"),
   Animal(
       nom: "Bobby",
       type: "Chat",
-      description:
-          "Petit chat atteint du cida qui passe ca journée a dormir et manger",
+      description: "Petit chat qui passe ca journée a dormir et manger",
       image: 'images/Boby.jpg',
       vivant: false,
       sexe: "male",
@@ -130,7 +129,8 @@ List<Animal> animaux = [
       description: "Chat gris et agile qui adore les câlins.",
       image: 'images/Métisse.jpg',
       sexe: "femelle",
-      vivant: false),
+      vivant: false,
+      surnom: "Moumoune"),
   Animal(
       nom: "Luna",
       type: "Chat",

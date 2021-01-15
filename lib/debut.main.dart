@@ -60,7 +60,6 @@ class _MyHomePageState extends State<MyHomePage> {
         );
   }
 
-
   List<Animal> animaux = [
     Animal(
         nom: "Fender",

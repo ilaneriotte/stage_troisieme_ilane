@@ -43,6 +43,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.orange[100],
       appBar: AppBar(
         title: Text(animal.nom),
       ),
@@ -56,16 +57,22 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                 children: [
                   IconButton(
                       icon: Icon(
-                        Icons.add_alert,
+                        Icons.sms_rounded,
                         size: 40,
                       ),
                       onPressed: () {
                         play(animal.son);
                       }),
                   SizedBox(height: 15, width: double.infinity),
-                  Image(
-                    image: AssetImage(animal.image),
-                    height: 200,
+                  Hero(
+                    tag: animal.nom,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Image(
+                        image: AssetImage(animal.image),
+                        height: 200,
+                      ),
+                    ),
                   ),
                   Text("Nom : " + animal.nom,
                       style: TextStyle(
@@ -82,7 +89,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                       style: TextStyle(fontSize: 25, color: Colors.blueGrey)),
                   Text(animal.sexe,
                       style: TextStyle(fontSize: 25, color: Colors.blueGrey)),
-                  Text(animal.vivant ? "Vivant" : "Mort",
+                  Text(animal.vivant ? "En vie" : "Mort",
                       style: TextStyle(fontSize: 25, color: Colors.blueGrey)),
                   Divider(),
                   Text(

@@ -9,7 +9,7 @@ void main() {
 
   rootBundle.load("sons/chat.mp3").then((_) {
     Sons.chat = _.buffer.asUint8List();
-    rootBundle.load("sons/chien.mp3").then((_) {
+    rootBundle.load("sons/chien2.mp3").then((_) {
       Sons.chien = _.buffer.asUint8List();
       runApp(MyApp());
     });
@@ -22,10 +22,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.orange,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Animaux'),
+      home: MyHomePage(title: 'AnimaListe'),
     );
   }
 }
@@ -57,41 +57,83 @@ class _MyHomePageState extends State<MyHomePage> {
         height: 150,
       ),
     );
-    list.addAll(
-      animaux.map((animal) {
-        bool estUnChien = animal.type == "Chien";
 
-        return Column(
-          children: [
-            SizedBox(height: 10),
-            ListTile(
-              leading: Image(
-                image: AssetImage(animal.image),
-                height: 200,
-              ),
-              subtitle: Text(animal.type,
-                  style: TextStyle(
-                      color:
-                          estUnChien ? Colors.green[800] : Colors.yellow[900])),
-              title: Text(
-                animal.nom,
-              ),
-              tileColor: Colors.grey.withAlpha(70),
-              trailing: Icon(Icons.arrow_forward_ios),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (ctx) => DescriptionScreen(animal)));
-              },
-            ),
-          ],
-        );
-      }).toList(),
+    List<Animal> chiens =
+        animaux.where((animal) => animal.type == "Chien").toList();
+    List<Animal> chats =
+        animaux.where((animal) => animal.type == "Chat").toList();
+
+    list.add(Divider(
+      thickness: 4,
+      color: Colors.grey[300],
+    ));
+
+    list.add(Text(
+      "Chiens",
+      textAlign: TextAlign.center,
+      style: TextStyle(
+          color: Colors.purple[200], fontSize: 25, fontWeight: FontWeight.w700),
+    ));
+    list.addAll(
+      chiens.map((animal) => afficherAnimal(animal)).toList(),
     );
 
-    return ListView(
-      children: list,
+    list.add(Divider(
+      thickness: 4,
+      color: Colors.purple[100],
+    ));
+    list.add(Text(
+      "Chats",
+      textAlign: TextAlign.center,
+      style: TextStyle(
+          color: Colors.pink[200], fontSize: 25, fontWeight: FontWeight.w700),
+    ));
+
+    list.addAll(
+      chats.map((animal) => afficherAnimal(animal)).toList(),
+    );
+
+    SliverChildListDelegate sliverDelegate = new SliverChildListDelegate(list);
+    return CustomScrollView(
+      slivers: <Widget>[
+        new SliverPadding(
+          padding: const EdgeInsets.symmetric(horizontal: 5.0),
+          sliver: new SliverList(
+            delegate: sliverDelegate,
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget afficherAnimal(Animal animal) {
+    bool estUnChien = animal.type == "Chien";
+
+    return Column(
+      children: [
+        SizedBox(height: 10),
+        ListTile(
+          leading: Hero(
+            tag: animal.nom,
+            child: CircleAvatar(
+              radius: 30,
+              backgroundImage: AssetImage(animal.image),
+            ),
+          ),
+          subtitle: Text(animal.type,
+              style: TextStyle(
+                  color: estUnChien ? Colors.green[800] : Colors.yellow[900])),
+          title: Text(
+            animal.nom,
+          ),
+          tileColor: estUnChien ? Colors.purple[50] : Colors.pink[50],
+          trailing: Icon(Icons.arrow_forward_ios),
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (ctx) => DescriptionScreen(animal)));
+          },
+        ),
+      ],
     );
   }
 }
