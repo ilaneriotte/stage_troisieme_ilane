@@ -3,6 +3,7 @@ import 'package:stage_ilane/animaux.dart';
 import 'package:stage_ilane/description.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import "sons.dart";
+import "jeu.dart";
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.orange,
@@ -45,16 +47,37 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
+          // actions: [
+          //   IconButton(
+          //     icon: Icon(Icons.games),
+          //     onPressed: () {
+          //       Navigator.push(
+          //           context, MaterialPageRoute(builder: (ctx) => JeuScreen()));
+          //     },
+          //   ),
+          // ],
         ),
         body: buildAnimaux2());
   }
 
+  int easterEgg = 0;
+
   Widget buildAnimaux2() {
     List<Widget> list = [];
     list.add(
-      Image(
-        image: AssetImage('images/iconeapp.jpg'),
-        height: 150,
+      GestureDetector(
+        onTap: () {
+          easterEgg++;
+          if (easterEgg > 3) {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (ctx) => JeuScreen()));
+            easterEgg = 0;
+          }
+        },
+        child: Image(
+          image: AssetImage('images/iconeapp.jpg'),
+          height: 150,
+        ),
       ),
     );
 
@@ -122,9 +145,14 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           subtitle: Text(animal.type,
               style: TextStyle(
-                  color: estUnChien ? Colors.green[800] : Colors.yellow[900])),
+                  color: estUnChien ? Colors.green[800] : Colors.yellow[900],
+                  fontSize: 15)),
           title: Text(
             animal.nom,
+            style: TextStyle(
+                color: Colors.blueGrey,
+                fontWeight: FontWeight.w500,
+                fontSize: 20),
           ),
           tileColor: estUnChien ? Colors.purple[50] : Colors.pink[50],
           trailing: Icon(Icons.arrow_forward_ios),
